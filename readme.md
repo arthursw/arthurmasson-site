@@ -1,3 +1,7 @@
+# Arthur's theme
+
+A theme based on bones.
+
 # Bones
 A Lightweight Wordpress Development Theme
 
