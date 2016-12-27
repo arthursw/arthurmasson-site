@@ -10,7 +10,41 @@
 
 							<article id="post-<?php the_ID(); ?>" <?php post_class( 'am-column' ); ?> role="article">
 
-								<header class="article-header">
+								<!-- <header class="article-header"> -->
+
+
+								<!-- </header> -->
+
+								<section class="entry-content ">
+								<?php 
+									if ( has_post_thumbnail() ) {
+										the_post_thumbnail();
+									} else {
+										$first_image_thumb_url = get_first_image_thumb_url(get_the_ID());
+
+										if($first_image_thumb_url == '') {
+											$first_image_thumb_url = get_first_image_url_from_content(get_the_content());
+										}
+
+										printf('<a href="' . get_the_permalink() . '" rel="bookmark" >');
+
+										if(!empty($first_image_thumb_url)) {
+											printf( '<img src="' . $first_image_thumb_url . '" alt="' . single_post_title() . '-thumb" />');
+											
+										}
+										else
+										{
+											the_excerpt();
+										}
+										printf('</a>');
+									}
+								?>
+								</section>
+
+								<footer class="article-footer ">
+                 				<?php // printf( '<p class="footer-category">%1$s</p>' , get_the_category_list(' ') ); ?>
+                  				<?php // the_tags( '<p class="footer-tags tags"><span class="tags-title">' . __( 'Tags:', 'bonestheme' ) . '</span> ', ', ', '</p>' ); ?>
+
 
 									<h1 class="h2 entry-title"><a href="<?php the_permalink() ?>" rel="bookmark" title="<?php the_title_attribute(); ?>"><?php the_title(); ?></a></h1>
 									<p class="byline entry-meta vcard">
@@ -26,37 +60,8 @@
                        								*/
                     							); ?>
 									</p>
-
-								</header>
-
-								<section class="entry-content ">
-								<?php 
-									if ( has_post_thumbnail() ) {
-										the_post_thumbnail();
-									} else {
-										$first_image_thumb_url = get_first_image_thumb_url(get_the_ID());
-
-										if($first_image_thumb_url == '') {
-											$first_image_thumb_url = get_first_image_url_from_content(get_the_content());
-										}
-
-										if(!empty($first_image_thumb_url)) {
-											printf( '<img src="' . $first_image_thumb_url . '" alt="' . single_post_title() . '-thumb" />');
-										}
-										else
-										{
-											the_excerpt();
-										}
-
-										printf( '</a>' );
-									}
-								?>
-								</section>
-
-								<!-- <footer class="article-footer "> -->
-                 				<?php // printf( '<p class="footer-category">%1$s</p>' , get_the_category_list(' ') ); ?>
-                  				<?php // the_tags( '<p class="footer-tags tags"><span class="tags-title">' . __( 'Tags:', 'bonestheme' ) . '</span> ', ', ', '</p>' ); ?>
-								<!-- </footer> -->
+									                  				
+								</footer>
 
 							</article>
 
