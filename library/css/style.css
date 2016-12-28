@@ -20,90 +20,6 @@ html {
 *, *::after, *::before {
   box-sizing: inherit; }
 
-#inner-header #logo {
-  display: inline-block;
-  vertical-align: middle;
-  margin-left: 30px; }
-#inner-header nav {
-  display: inline-block;
-  vertical-align: middle;
-  margin-left: 30px; }
-
-#main {
-  max-width: 1200px;
-  margin-left: auto;
-  margin-right: auto; }
-  #main::after {
-    clear: both;
-    content: "";
-    display: block; }
-  @media screen and (min-width: 420px) and (max-width: 760px) {
-    #main article.am-column {
-      float: left;
-      display: block;
-      margin-right: 2.35765%;
-      width: 100%; }
-      #main article.am-column:last-child {
-        margin-right: 0; }
-      #main article.am-column:nth-child(n) {
-        margin-right: 0; } }
-  @media screen and (min-width: 760px) and (max-width: 1030px) {
-    #main article.am-column {
-      float: left;
-      display: block;
-      margin-right: 2.35765%;
-      width: 48.82117%; }
-      #main article.am-column:last-child {
-        margin-right: 0; }
-      #main article.am-column:nth-child(2n) {
-        margin-right: 0; }
-      #main article.am-column:nth-child(2n+1) {
-        clear: left; } }
-  @media screen and (min-width: 1031px) {
-    #main article.am-column {
-      float: left;
-      display: block;
-      margin-right: 2.35765%;
-      width: 31.76157%; }
-      #main article.am-column:last-child {
-        margin-right: 0; }
-      #main article.am-column:nth-child(3n) {
-        margin-right: 0; }
-      #main article.am-column:nth-child(3n+1) {
-        clear: left; } }
-  #main article.am-column section.entry-content {
-    text-align: center; }
-
-.gallery .row {
-  max-width: 1200px;
-  margin-left: auto;
-  margin-right: auto; }
-  .gallery .row::after {
-    clear: both;
-    content: "";
-    display: block; }
-  .gallery .row > a {
-    float: left;
-    display: block;
-    margin-right: 2.35765%;
-    width: 23.23176%; }
-    .gallery .row > a:last-child {
-      margin-right: 0; }
-    .gallery .row > a:nth-child(4n) {
-      margin-right: 0; }
-    .gallery .row > a:nth-child(4n+1) {
-      clear: left; }
-.gallery br {
-  display: none; }
-
-nav.pagination::after {
-  clear: both;
-  content: "";
-  display: block; }
-
-.am-center {
-  text-align: center; }
-
 /*********************
 IMPORTING PARTIALS
 These files are needed at the beginning so that we establish all
@@ -2210,5 +2126,107 @@ be set to display none.
   .respond-form,
   nav {
     display: none; } }
+/*********************
+Custom styles for AM
+*********************/
+#inner-header #logo {
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 30px; }
+#inner-header nav {
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 30px; }
+
+#main {
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto; }
+  #main::after {
+    clear: both;
+    content: "";
+    display: block; }
+  @media screen and (min-width: 420px) and (max-width: 760px) {
+    #main article.am-column {
+      float: left;
+      display: block;
+      margin-right: 2.35765%;
+      width: 100%; }
+      #main article.am-column:last-child {
+        margin-right: 0; }
+      #main article.am-column:nth-child(n) {
+        margin-right: 0; } }
+  @media screen and (min-width: 760px) and (max-width: 1030px) {
+    #main article.am-column {
+      float: left;
+      display: block;
+      margin-right: 2.35765%;
+      width: 48.82117%; }
+      #main article.am-column:last-child {
+        margin-right: 0; }
+      #main article.am-column:nth-child(2n) {
+        margin-right: 0; }
+      #main article.am-column:nth-child(2n+1) {
+        clear: left; } }
+  @media screen and (min-width: 1031px) {
+    #main article.am-column {
+      float: left;
+      display: block;
+      margin-right: 2.35765%;
+      width: 31.76157%; }
+      #main article.am-column:last-child {
+        margin-right: 0; }
+      #main article.am-column:nth-child(3n) {
+        margin-right: 0; }
+      #main article.am-column:nth-child(3n+1) {
+        clear: left; } }
+  #main article.hentry .am-preview-frame {
+    margin: auto; }
+    #main article.hentry .am-preview-frame header {
+      border-bottom: 1px solid #f8f9fa;
+      padding: 1.5em; }
+    #main article.hentry .am-preview-frame section {
+      text-align: center; }
+      #main article.hentry .am-preview-frame section img {
+        width: 300px;
+        height: 200px; }
+    #main article.hentry .am-preview-frame footer {
+      padding: 1.5em;
+      padding-top: 0;
+      border-top: 0; }
+      #main article.hentry .am-preview-frame footer p {
+        margin: 0; }
+      #main article.hentry .am-preview-frame footer .entry-title a {
+        font-size: 18px; }
+
+.gallery .row {
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto; }
+  .gallery .row::after {
+    clear: both;
+    content: "";
+    display: block; }
+  .gallery .row > a {
+    float: left;
+    display: block;
+    margin-right: 2.35765%;
+    width: 23.23176%; }
+    .gallery .row > a:last-child {
+      margin-right: 0; }
+    .gallery .row > a:nth-child(4n) {
+      margin-right: 0; }
+    .gallery .row > a:nth-child(4n+1) {
+      clear: left; }
+.gallery br {
+  display: none; }
+
+nav.pagination::after {
+  clear: both;
+  content: "";
+  display: block; }
+
+.am-center {
+  text-align: center; }
 
 /*# sourceMappingURL=style.css.map */
