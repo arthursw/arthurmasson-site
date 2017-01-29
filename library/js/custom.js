@@ -22,7 +22,7 @@
 	// 	updateDate();
 
 	// 	let translate = function(to) {
-			
+
 	// 		let from = to == 'english' ? 'french' : 'english';
 
 	// 		localStorage.setItem('language', to);
@@ -46,7 +46,7 @@
 
 	// 		$("["+from+"]").each(function() {
 	// 			$(this).html($(this).html().replace($(this).attr(from), $(this).attr(to)))
-	// 		})    
+	// 		})
 
 
 	// 		let translateTitle = function() {
@@ -81,7 +81,7 @@
 	// 	linkJ.click(function(event){
 
 	// 		parent = $(event.target).parent();
-			
+
 	// 		if(parent.hasClass("nav-english")) {
 	// 			parent.removeClass("nav-english").addClass("nav-french").find("a").text("Français");
 	// 			translate('english');
@@ -99,7 +99,7 @@
 	// 	$("#site-head .nav").append(menuItemJ)
 
 	// 	setTimeout(function(){ menuItemJ.addClass('translated') }, 0)
-		
+
 		// put content in an inner div
 
 		let headerJ = $("div.header.center")
@@ -108,12 +108,12 @@
 
 
 		let galleryJs = $(".gallery")
-		for(let gallery of galleryJs) {
-
-			let galleryJ = $(gallery)
+		// for(let gallery of galleryJs) {
+    galleryJs.each( (index, gellery)=> {
+			let galleryJ = $(gellery);
 
 			// create gallery:
-			
+
 			// get item classes
 			// let classes = galleryJ.attr('itemclasses');
 			let largeImageSize = galleryJ.attr('largeimagesize');
@@ -131,18 +131,27 @@
 				smallImageSize = smallImageSize.split('x');
 			}
 
-			// put all img into a linking to the large version of the image
-			// add all item classes to the a item
-			let images = galleryJ.find("img").slice(0);
 
 			let containerJ = $("<div>");
 			containerJ.addClass('row')
-			for(let img of images) {
+
+      // put all img into a linking to the large version of the image
+			// add all item classes to the a item
+			let images = galleryJ.find("img");
+
+      console.log(galleryJ)
+      window.ggg = galleryJ
+      console.log(images)
+			// for(let img of images) {
+      images.each( (index, img)=> {
 				let imgJ = $(img);
+        console.log(imgJ)
 				let aJ = $('<a>');
 				aJ.append(imgJ);
 				// aJ.addClass(classes);
 				containerJ.append(aJ);
+
+        aJ.attr('href', img.src.replace(/.jpg$/, '_large.jpg'));
 
 				imgJ.load( () => {
 					console.log("loaded: " + img.src)
@@ -155,20 +164,20 @@
 					// console.log("initializeImage: " + imgWidth + ", " + imgHeight)
 					imgJ.attr('imagesize', '' + (smallImageSizeDefined ? smallImageSize[0] : imgWidth) + 'x' + (smallImageSizeDefined ? smallImageSize[1] : imgHeight));
 					aJ.attr('imagesize', '' + (largeImageSizeDefined ? smallImageSize[0] : 2 * imgWidth) + 'x' + (largeImageSizeDefined ? smallImageSize[1] : 2 * imgHeight));
-					aJ.attr('href', img.src.replace(/.jpg$/, '_large.jpg'));
+					// aJ.attr('href', img.src.replace(/.jpg$/, '_large.jpg'));
 				});
 				imgJ.load();
 
 				// if (!img.complete) {
 				// 	console.log("not yet loaded: " + img.src)
-					
+
 				// } else {
 				// 	console.log("already loaded:" + img.src)
 				// 	initializeImage(img, imgJ, aJ, true);
 				// }
-			}
-			galleryJ.append(containerJ);	
-		}
+			})
+			galleryJ.append(containerJ);
+		})
 
 
 
@@ -184,11 +193,11 @@
 
 		// Hide other language:
 		// let language = QueryString.lang;
-		
+
 		// let otherLang = lang == "fr" ? "en" : "fr";
 
 
-			// On the home page, move the blog icon inside the header 
+			// On the home page, move the blog icon inside the header
 			// for better relative/absolute positioning.
 
 			//$("#blog-logo").prependTo("#site-head-content");
@@ -202,16 +211,16 @@
 		// }
 
 		let footerCategoryJ = $('.footer-category')
-		
+
 		footerCategoryJ.each( function() {
 			console.log(this)
 			console.log($(this).children().length)
 			let nChildren = $(this).children().length
 			if(nChildren < 1 || $(this).find("a:contains('Non classé')").length > 0) {
 				$(this).parent().hide()
-			}	
+			}
 		})
-		
+
 
 		footerCategoryJ.find("a:contains('Non classé')").hide()
 
