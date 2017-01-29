@@ -50,13 +50,14 @@ I've edited it a bit, but it's a nice starting point.
 
 // font stacks
 $sans-serif:        "Open Sans", Helvetica, Arial, sans-serif;
+$sans-serif-alt:    "Source Code Pro", "Helvetica Neue", "Open Sans", Helvetica, Arial, sans-serif;
 $serif:             "Roboto Slab", Cambria, Times New Roman, Times, serif;
 
 /*
  i imported this one in the functions file so bones would look sweet.
  don't forget to remove it for your site.
 */
-$lato:              'Roboto Slab', $sans-serif;
+$lato:              Helvetica; // 'Roboto Slab', $sans-serif;
 
 /*
 some nice typographical defaults
@@ -81,4 +82,3 @@ p {
        -o-font-feature-settings: "liga", "dlig";
           font-feature-settings: "liga", "dlig";
 }
-

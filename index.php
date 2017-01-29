@@ -17,30 +17,47 @@
 
 								<div class="am-preview-frame">
 
+									<a href="">
+
 									<section class="entry-content ">
-									<?php 
-										if ( has_post_thumbnail() ) {
-											the_post_thumbnail();
-										} else {
-											$first_image_thumb_url = get_first_image_thumb_url(get_the_ID());
+										<a href="<?php the_permalink() ?>" rel="bookmark" title="<?php the_title_attribute(); ?>">
 
-											if($first_image_thumb_url == '') {
-												$first_image_thumb_url = get_first_image_url_from_content(get_the_content());
-											}
+											<?php
+												if ( has_post_thumbnail() ) {
+													the_post_thumbnail();
+												} else {
+													$first_image_thumb_url = get_first_image_thumb_url(get_the_ID());
 
-											printf('<a href="' . get_the_permalink() . '" rel="bookmark" >');
+													if($first_image_thumb_url == '') {
+														$first_image_thumb_url = get_first_image_url_from_content(get_the_content());
+														$path = parse_url($first_image_thumb_url, PHP_URL_PATH);
+														$pathFragments = explode('/', $path);
+														$end = end($pathFragments);
+														$ext = pathinfo($end, PATHINFO_EXTENSION);
+														$filename = pathinfo($end, PATHINFO_FILENAME);
+														$filename = $filename . '_large' . '.' . $ext;
+														$first_image_thumb_url = str_replace($end, $filename, $first_image_thumb_url);
+													}
 
-											if(!empty($first_image_thumb_url)) {
-												printf( '<img src="' . $first_image_thumb_url . '" alt="' . single_post_title() . '-thumb" />');
-												
-											}
-											else
-											{
-												the_excerpt();
-											}
-											printf('</a>');
-										}
-									?>
+													// printf('<a href="' . get_the_permalink() . '" rel="bookmark" >');
+
+													// printf('<div class="am-image-container">');
+													if(!empty($first_image_thumb_url)) {
+														printf( '<img src="' . $first_image_thumb_url . '" alt="' . single_post_title() . '-thumb" />');
+
+													}
+													else
+													{
+														the_excerpt();
+													}
+													// printf('</div>');
+													// printf('</a>');
+												}
+											?>
+
+											<h1 class="h2 entry-title"><span><?php the_title(); ?></span></h1>
+
+										</a>
 									</section>
 
 									<footer class="article-footer ">
@@ -48,21 +65,20 @@
 	                  				<?php // the_tags( '<p class="footer-tags tags"><span class="tags-title">' . __( 'Tags:', 'bonestheme' ) . '</span> ', ', ', '</p>' ); ?>
 
 
-										<h1 class="h2 entry-title"><a href="<?php the_permalink() ?>" rel="bookmark" title="<?php the_title_attribute(); ?>"><?php the_title(); ?></a></h1>
-										<p class="byline entry-meta vcard">
-													<?php printf( '%1$s',
+										<!-- <p class="byline entry-meta vcard"> -->
+													<?php // printf( '%1$s',
 	                       								/* the time the post was published */
-	                       								'<time class="updated entry-time" datetime="' . get_the_time('Y-m') . '" itemprop="datePublished">' . get_the_time(get_option('date_format')) . '</time>'
+	                       								// '<time class="updated entry-time" datetime="' . get_the_time('Y-m') . '" itemprop="datePublished">' . get_the_time(get_option('date_format')) . '</time>'
 	                       								/* the author of the post */
-	                       								/* 
+	                       								/*
 
-	                       								'<span class="by">'.__( 'by', 'bonestheme').'</span> <span class="entry-author author" itemprop="author" itemscope 
-	                       								itemptype="http://schema.org/Person">' . get_the_author_link( get_the_author_meta( 'ID' ) ) . '</span>' 
-	                       								
+	                       								'<span class="by">'.__( 'by', 'bonestheme').'</span> <span class="entry-author author" itemprop="author" itemscope
+	                       								itemptype="http://schema.org/Person">' . get_the_author_link( get_the_author_meta( 'ID' ) ) . '</span>'
+
 	                       								*/
-	                    							); ?>
-										</p>
-										                  				
+	                    							// ); ?>
+										<!-- </p> -->
+
 									</footer>
 
 								</div> <!-- / div.am-preview-frame -->

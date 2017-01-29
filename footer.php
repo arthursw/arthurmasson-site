@@ -1,6 +1,6 @@
 			<footer class="footer" role="contentinfo" itemscope itemtype="http://schema.org/WPFooter">
 
-				<div id="inner-footer" class="wrap cf">
+				<div id="inner-footer" class="">
 
 					<nav role="navigation">
 						<?php wp_nav_menu(array(
@@ -18,7 +18,7 @@
 						)); ?>
 					</nav>
 
-					<p class="source-org copyright">&copy; <?php echo date('Y'); ?> <?php bloginfo( 'name' ); ?></p>
+					<!-- <p class="source-org copyright"><span class="mirror">&copy;</span> <?php echo date('Y'); ?> <?php bloginfo( 'name' ); ?></p> -->
 
 				</div>
 
@@ -29,6 +29,7 @@
 		<?php // all js scripts are loaded in library/bones.php ?>
 		<?php wp_footer(); ?>
 
+		<canvas id="canvas"></canvas>
+		
 	</body>
-
 </html> <!-- end of site. what a ride! -->

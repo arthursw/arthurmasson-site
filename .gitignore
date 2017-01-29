@@ -56,3 +56,7 @@ temp/
 
 *.codekit
 *.scssc
+
+# Custom
+
+library/js/generators/node_modules/

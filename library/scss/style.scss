@@ -127,8 +127,8 @@ other displays with a 2x resolution. You can also create a media
 query for retina AND a certain size if you want. Go Nuts.
 *********************/
 @media only screen and (-webkit-min-device-pixel-ratio: 1.5),
-       only screen and (min--moz-device-pixel-ratio: 1.5),
-       only screen and (min-device-pixel-ratio: 1.5) {
+			 only screen and (min--moz-device-pixel-ratio: 1.5),
+			 only screen and (min-device-pixel-ratio: 1.5) {
 
 	// styles in 2x.scss
 	@import "breakpoints/2x";
@@ -156,16 +156,84 @@ Custom styles for AM
 $font-head:    'Roboto Slab', serif;
 $font-body:    'Open Sans', sans-serif;
 
+$nav-link-hover-color: rgba(28, 86, 125, 0.36);
+$hover-color: hsl(0, 95%, 43%);
+
+#canvas {
+		position: fixed;
+		// height: calc(100% - 70px);
+		// width: calc(33% - 40px);
+		// left: calc(66% + 40px);
+		// right: 20px;
+		// bottom: 20px;
+		// top: 80px;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		width: 100%;
+		height: 100%;
+		z-index: -1;
+}
+
 #inner-header {
 	#logo {
 		display: inline-block;
 		vertical-align: middle;
-    	margin-left: 30px;
+			margin-left: 30px;
+			display: none;
+
+			a {
+				color: black;
+				padding-left: 10px;
+				padding-right: 10px;
+
+			font-size: 16px;
+			color: black;
+			font-family: $sans-serif;
+			font-weight: 100;
+			background: hsla(0, 0%, 96%, 1);
+				padding-left: 3px;
+				padding-right: 3px;
+			line-height: 0.75em;
+
+				&:hover {
+					color: lighten(black, 20);
+					text-decoration: none;
+				}
+			}
 	}
 	nav {
 		display: inline-block;
-    	vertical-align: middle;
-    	margin-left: 30px;
+			vertical-align: middle;
+			margin-left: 20px;
+			margin-top: 20px;
+
+			li {
+				padding-right: 5px;
+			}
+
+			a {
+			font-size: 16px;
+			color: rgba(0, 0, 0, 0.65);
+			font-family: $sans-serif;
+			font-weight: 500;
+			// background: hsla(0, 0%, 96%, 1);
+			padding-left: 3px;
+			padding-right: 3px;
+			line-height: 0.75em;
+			background-color: white;
+
+				&:hover {
+
+					// color: black;
+					// background-color: $nav-link-hover-color;
+					text-decoration: none;
+					background-color: $hover-color;
+					color: #ffffff;
+				}
+			}
+
 	}
 }
 
@@ -176,8 +244,32 @@ $small-viewport: new-breakpoint(min-width $first-breakpoint-value max-width $sec
 $medium-viewport: new-breakpoint(min-width $second-breakpoint-value max-width $third-breakpoint-value);
 $large-viewport: new-breakpoint(min-width $third-breakpoint-value + 1);
 
+#container {
+		width: 66%;
+		max-width: 1200px;
+		margin: auto;
+}
+
+// body.single {
+// 	#container {
+// 		background-color: rgba(255, 255, 255, 0.9);
+//
+// 		section.entry-content:hover {
+// 			background-color: rgba(255, 255, 255, 1);
+// 		}
+// 	}
+// }
+
 #main {
 	@include outer-container;
+
+	&[role="main"] {
+		// max-width: 66%;
+		// margin: {
+		// 	left: 20px;
+		// 	right: 20px;
+		// }
+	}
 
 	article.am-column {
 
@@ -198,52 +290,186 @@ $large-viewport: new-breakpoint(min-width $third-breakpoint-value + 1);
 
 	}
 
-	article.hentry {
-		// background-color: transparent;
+	article.am-column {
+		background-color: transparent;
 		// margin-bottom: 1.5em;
-		// border: 0;
+		border: 0;
 
 		.am-preview-frame {
 
 			// max-width: 300px;
 			margin: auto;
+			margin-bottom: 20px;
 			// background-color: $white;
 			// border-radius: 3px;
 			// border: 1px solid $border-color;
 
 			header {
-				border-bottom: 1px solid $light-gray;
-				padding: 1.5em;
+				// border-bottom: 1px solid $light-gray;
+				// padding: 1.5em;
 			}
 
-			section {
-				text-align: center;
-			    // height: 200px;
-				img {
-					width: 300px;
-			    	height: 200px;
+			section.entry-content {
+				padding: 0;
+				a {
+					outline: none;
+					text-decoration: none;
+					img {
+						margin: 0;
+						// border-bottom: 5px solid hsla(0, 0%, 96%, 1);
+						border-bottom: 5px solid transparent;
+					}
+
+					h1.entry-title {
+						text-align: left;
+						text-decoration: none;
+						line-height: 0.75em;
+						margin-top: -10px;
+						span {
+							font-weight: 300;
+							font-size: 16px;
+							color: black;
+							font-family: $sans-serif;
+							// background: hsla(0, 0%, 96%, 1);
+								padding-left: 3px;
+								padding-right: 3px;
+						}
+					}
+
+					&:hover {
+
+						outline: none;
+
+						img {
+							border-bottom: 5px solid $hover-color;
+						}
+
+						h1.entry-title {
+							span {
+								background-color: $hover-color;
+								color: #ffffff;
+								font-weight: 500;
+							}
+						}
+					}
 				}
+
 			}
+
+			// section.entry-content {
+			// 	text-align: center;
+
+			// 	padding: 0;
+
+			// 	a {
+
+			// 		border-bottom: 1px solid hsla(0, 0%, 96%, 1);
+			// 		background-color: hsla(0, 0%, 96%, 1);
+
+			// 		&:hover + h1 > a {
+			// 			background-color: $hover-color;
+			// 			color: #ffffff;
+			// 			font-weight: 500;
+			// 		}
+
+			// 		&:hover {
+			// 			border-bottom: 1px solid $hover-color;
+			// 			background-color: $hover-color;
+			// 		}
+
+			// 	}
+
+			// 	h1.entry-title {
+			// 		margin-top: -15px;
+			// 		text-align: left;
+			// 		a {
+			// 			font-size: 16px;
+			// 			color: black;
+			// 			font-family: $sans-serif;
+			// 			font-weight: 300;
+			// 			background: hsla(0, 0%, 96%, 1);
+			// 		    padding-left: 3px;
+			// 		    padding-right: 3px;
+	 //  					line-height: 0.75em;
+			// 			// font-style: italic;
+			// 			&:hover {
+			// 				// background-color: $nav-link-hover-color;
+			// 				background-color: $hover-color;
+			// 				color: #ffffff;
+			// 				font-weight: 500;
+
+
+			// 			}
+
+			// 		}
+			// 	}
+			// }
 
 			footer {
-				padding: 1.5em;
-				padding-top: 0;
+
+				padding: 0;
 				border-top: 0;
+				margin-top: 0px;
+				// border: 1px solid black;
+				// background-color: lightblue;
+
+				h1.entry-title{
+					a {
+						font-size: 16px;
+						color: black;
+						font-family: $sans-serif;
+						font-weight: 300;
+						background: hsla(0, 0%, 96%, 1);
+							padding-left: 3px;
+							padding-right: 3px;
+							line-height: 0.75em;
+						// font-style: italic;
+						&:hover {
+							// background-color: $nav-link-hover-color;
+							background-color: $hover-color;
+							color: #ffffff;
+							font-weight: 500;
+						}
+					}
+				}
 
 				p {
 					margin: 0;
-				}
-
-				.entry-title {
-					a {
-						font-size: 18px;
-					}
 				}
 			}
 
 		}
 
+		.am-preview-frame:hover {
+			// background-color: $nav-link-hover-color;
+		}
 
+	}
+
+	article {
+		iframe {
+			max-width: 100%;
+		}
+	}
+}
+
+* {
+	&::selection {
+		color: white;
+	  background: $hover-color; /* WebKit/Blink Browsers */
+	}
+	&::-moz-selection {
+		color: white;
+	  background: $hover-color; /* Gecko Browsers */
+	}
+}
+
+body.home {
+	background-color: white;
+
+	.content {
+		margin-left: 2em;
+		margin-right: 2em;
 	}
 }
 
@@ -252,9 +478,25 @@ $large-viewport: new-breakpoint(min-width $third-breakpoint-value + 1);
 		@include outer-container;
 
 		& > a {
-			@include span-columns(3);
-			@include omega(4n);
+			// @include span-columns(3);
+			// @include omega(4n);
+
+			@include media($small-viewport) {
+				@include span-columns(12);
+				@include omega(n);
+			}
+
+			@include media($medium-viewport) {
+				@include span-columns(6);
+				@include omega(2n);
+			}
+
+			@include media($large-viewport) {
+				@include span-columns(3);
+				@include omega(4n);
+			}
 		}
+
 	}
 
 	br {
@@ -271,3 +513,22 @@ nav.pagination {
 .am-center {
 	text-align: center;
 }
+
+.mirror {
+	-webkit-transform: rotate(180deg); /* Ch <36, Saf 5.1+, iOS < 9.2, An =<4.4.4 */
+		-ms-transform: rotate(180deg); /* IE 9 */
+		transform: rotate(180deg); /* IE 10, Fx 16+, Op 12.1+ */
+}
+h1.entry-title.single-title, h1.page-title {
+	// font-family: "Source Code Pro", "Helvetica Neue", "Open Sans", Helvetica, Arial, sans-serif;
+	font-family: $sans-serif-alt;
+	font-weight: 100;
+}
+
+// article {
+// 	header {
+// 		h1.entry-title {
+// 			// font-family: $sans-serif-alt;
+// 		}
+// 	}
+// }

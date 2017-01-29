@@ -117,6 +117,19 @@ function bones_gallery_style($css) {
 SCRIPTS & ENQUEUEING
 *********************/
 
+if (!function_exists('write_log')) {
+    function write_log ( $log )  {
+        if ( true === WP_DEBUG ) {
+            if ( is_array( $log ) || is_object( $log ) ) {
+                error_log( print_r( $log, true ) );
+            } else {
+                error_log( $log );
+            }
+        }
+    }
+}
+
+
 // loading modernizr and jquery, and reply script
 function bones_scripts_and_styles() {
 
@@ -137,7 +150,7 @@ function bones_scripts_and_styles() {
 		wp_register_style( 'photoswipe-stylesheet', get_stylesheet_directory_uri() . '/library/js/libs/photoswipe/photoswipe.css', array(), '', 'all' );
 		wp_register_style( 'photoswipe-default-skin-stylesheet', get_stylesheet_directory_uri() . '/library/js/libs/photoswipe/default-skin/default-skin.css', array(), '', 'all' );
 
-		wp_register_style( 'font-stylesheet', 'https://fonts.googleapis.com/css?family=Open+Sans:300,400,700,800|Roboto+Slab:100,300,400,700', array(), '', 'all' );
+		wp_register_style( 'font-stylesheet', 'https://fonts.googleapis.com/css?family=Open+Sans:300,400,700,800|Source+Code+Pro:200,300,400,500,600,700', array(), '', 'all' );
 
 		// ie-only style sheet
 		wp_register_style( 'bones-ie-only', get_stylesheet_directory_uri() . '/library/css/ie.css', array(), '' );
@@ -152,6 +165,14 @@ function bones_scripts_and_styles() {
 		wp_register_script( 'gallery-js', get_stylesheet_directory_uri() . '/library/js/gallery.js', array( 'photoswipe', 'processing' ), '', true );
 		wp_register_script( 'custom-js', get_stylesheet_directory_uri() . '/library/js/custom.js', array( 'photoswipe', 'processing' ), '', true );
 
+
+		wp_register_script( 'three-js', get_stylesheet_directory_uri() . '/library/js/generators/node_modules/three/build/three.min.js', array( ), '', true );
+		wp_register_script( 'three-mesh-line', get_stylesheet_directory_uri() . '/library/js/generators/node_modules/three/THREE.MeshLine.js', array( ), '', true );
+		// wp_register_script( 'three-js-canvas-renderer', get_stylesheet_directory_uri() . '/library/js/generators/node_modules/three/examples/js/renderers/CanvasRenderer.js', array( ), '', true );
+		// wp_register_script( 'three-js-projector', get_stylesheet_directory_uri() . '/library/js/generators/node_modules/three/examples/js/renderers/Projector.js', array( ), '', true );
+
+		wp_register_script( 'generator-js', get_stylesheet_directory_uri() . '/library/js/generators/js/main.js', array( 'three-js' ), '', true );
+
 		wp_enqueue_style( 'photoswipe-stylesheet' );
 		wp_enqueue_style( 'photoswipe-default-skin-stylesheet' );
 
@@ -162,6 +183,7 @@ function bones_scripts_and_styles() {
 		wp_enqueue_script( 'photoswipe');
 		wp_enqueue_script( 'photoswipe-ui-default');
 		wp_enqueue_script( 'processing' );
+
 
 		wp_enqueue_style( 'bones-stylesheet' );
 		wp_enqueue_style( 'bones-ie-only' );
@@ -178,6 +200,12 @@ function bones_scripts_and_styles() {
 		wp_enqueue_script( 'bones-js' );
 		wp_enqueue_script( 'gallery-js', 'photoswipe', 'photoswipe-ui-default');
 		wp_enqueue_script( 'custom-js' );
+
+		wp_enqueue_script( 'three-js' );
+		wp_enqueue_script( 'three-mesh-line', 'three-js' );
+		// wp_enqueue_script( 'three-js-canvas-renderer', 'three-js' );
+		// wp_enqueue_script( 'three-js-canvas-projector', 'three-js', 'three-js-canvas-renderer' );
+		wp_enqueue_script( 'generator-js', 'three-js-canvas-projector' );
 
 
 	}
