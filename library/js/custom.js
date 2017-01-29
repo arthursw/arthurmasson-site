@@ -108,8 +108,8 @@
 
 		let galleryJs = $(".gallery")
 		// for(let gallery of galleryJs) {
-    galleryJs.each( (index, gellery)=> {
-			let galleryJ = $(gellery);
+    galleryJs.each( (index, gallery)=> {
+			let galleryJ = $(gallery);
 
 			// create gallery:
 
