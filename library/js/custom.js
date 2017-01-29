@@ -104,7 +104,6 @@
 
 		let headerJ = $("div.header.center")
 		$("article.post header").before(headerJ)
-		console.log(headerJ)
 
 
 		let galleryJs = $(".gallery")
@@ -139,13 +138,9 @@
 			// add all item classes to the a item
 			let images = galleryJ.find("img");
 
-      console.log(galleryJ)
-      window.ggg = galleryJ
-      console.log(images)
 			// for(let img of images) {
       images.each( (index, img)=> {
 				let imgJ = $(img);
-        console.log(imgJ)
 				let aJ = $('<a>');
 				aJ.append(imgJ);
 				// aJ.addClass(classes);
@@ -154,11 +149,8 @@
         aJ.attr('href', img.src.replace(/.jpg$/, '_large.jpg'));
 
 				imgJ.load( () => {
-					console.log("loaded: " + img.src)
 					let imgWidth = img.naturalWidth;
 					let imgHeight = img.naturalHeight;
-					console.log(imgJ)
-					console.log(aJ)
 					//initializeImage(this, this.width, this.height, imgJ, aJ);
 					// console.log("initializeImage: " + img.src)
 					// console.log("initializeImage: " + imgWidth + ", " + imgHeight)
