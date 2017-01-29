@@ -137,10 +137,10 @@ document.addEventListener("DOMContentLoaded", function (event) {
         context.lineCap = 'square';
         city.width = canvas.width;
         city.height = canvas.height;
-        actors[0].initialize(new THREE.Vector3(20, 20, 0), 0);
-        actors[1].initialize(new THREE.Vector3(city.width - 20, city.height - 20, 0), 2 * 90);
-        // actors[2].initialize(new THREE.Vector3(city.width-20, 20, 0), 2*90);
-        // actors[3].initialize(new THREE.Vector3(20, city.height-20, 0), 0);
+        actors[0].initialize(new Point(20, 20), 0);
+        actors[1].initialize(new Point(city.width - 20, city.height - 20), 2 * 90);
+        // actors[2].initialize(new Point(city.width-20, 20), 2*90);
+        // actors[3].initialize(new Point(20, city.height-20), 0);
     }
     function animate() {
         requestAnimationFrame(animate);
