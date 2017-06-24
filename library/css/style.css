@@ -2302,7 +2302,14 @@ body.home {
   justify-content: center;
   align-items: center; }
   .gallery dl.gallery-item {
-    width: 260px;
+    width: 250px;
+    height: 250px;
+    object-fit: contain;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: black;
+    border: 2px solid black;
     margin: 10px;
     overflow: hidden; }
     .gallery dl.gallery-item dt.gallery-icon {
