@@ -141,11 +141,16 @@ function bones_scripts_and_styles() {
 		wp_register_script( 'bones-modernizr', get_stylesheet_directory_uri() . '/library/js/libs/modernizr.custom.min.js', array(), '2.5.3', false );
 		wp_register_script( 'photoswipe', get_stylesheet_directory_uri() . '/library/js/libs/photoswipe/photoswipe.js', array(), '', false );
 		wp_register_script( 'photoswipe-ui-default', get_stylesheet_directory_uri() . '/library/js/libs/photoswipe/photoswipe-ui-default.js', array(), '', false );
+		wp_register_style( 'fullpage', get_stylesheet_directory_uri() . '/library/js/fullPage/jquery.fullpage.min.css', array(), '', false );
+		wp_register_style( 'jquery-ui', get_stylesheet_directory_uri() . '/library/js/jquery-ui-1.12.1/jquery-ui.min.css', array(), '', false );
 
 		wp_register_script( 'processing', get_stylesheet_directory_uri() . '/library/js/libs/processing.min.js', array(), '', false );
 
 		// register main stylesheet
 		wp_register_style( 'bones-stylesheet', get_stylesheet_directory_uri() . '/library/css/style.css', array(), '', 'all' );
+		
+
+
 
 		wp_register_style( 'photoswipe-stylesheet', get_stylesheet_directory_uri() . '/library/js/libs/photoswipe/photoswipe.css', array(), '', 'all' );
 		wp_register_style( 'photoswipe-default-skin-stylesheet', get_stylesheet_directory_uri() . '/library/js/libs/photoswipe/default-skin/default-skin.css', array(), '', 'all' );
@@ -162,9 +167,18 @@ function bones_scripts_and_styles() {
 
 		//adding scripts file in the footer
 		wp_register_script( 'bones-js', get_stylesheet_directory_uri() . '/library/js/scripts.js', array( 'jquery' ), '', true );
+		// wp_register_script( 'philter', get_stylesheet_directory_uri() . '/library/js/philter/philter.min.js', array( ), '', true );
 		wp_register_script( 'gallery-js', get_stylesheet_directory_uri() . '/library/js/gallery.js', array( 'photoswipe', 'processing' ), '', true );
 		wp_register_script( 'custom-js', get_stylesheet_directory_uri() . '/library/js/custom.js', array( 'photoswipe', 'processing' ), '', true );
+		
+		wp_register_script( 'fullpage-js', get_stylesheet_directory_uri() . '/library/js/fullPage/jquery.fullpage.min.js', array( 'jquery' ), '', true );
 
+		
+		wp_register_script( 'jquery-ui', get_stylesheet_directory_uri() . '/library/js/jquery-ui-1.12.1/jquery-ui.min.js', array( 'jquery' ), '', true );
+		
+		wp_register_script( 'jquery-ui-touch', get_stylesheet_directory_uri() . '/library/js/jquery.ui.touch-punch.min.js', array( 'jquery-ui' ), '', true );
+
+		// wp_register_script( 'masonry', 'https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js', array(), '', true );
 
 		// wp_register_script( 'three-js', get_stylesheet_directory_uri() . '/library/js/generators/node_modules/three/build/three.min.js', array( ), '', true );
 		// wp_register_script( 'three-mesh-line', get_stylesheet_directory_uri() . '/library/js/generators/node_modules/three/THREE.MeshLine.js', array( ), '', true );
@@ -175,6 +189,8 @@ function bones_scripts_and_styles() {
 
 		wp_enqueue_style( 'photoswipe-stylesheet' );
 		wp_enqueue_style( 'photoswipe-default-skin-stylesheet' );
+		wp_enqueue_style( 'fullpage' );
+		wp_enqueue_style( 'jquery-ui' );
 
 		wp_enqueue_style( 'font-stylesheet' );
 
@@ -183,6 +199,11 @@ function bones_scripts_and_styles() {
 		wp_enqueue_script( 'photoswipe');
 		wp_enqueue_script( 'photoswipe-ui-default');
 		wp_enqueue_script( 'processing' );
+		// wp_enqueue_script( 'masonry' );
+
+		wp_enqueue_script( 'fullpage-js' );
+		wp_enqueue_script( 'jquery-ui' );
+		wp_enqueue_script( 'jquery-ui-touch' );
 
 
 		wp_enqueue_style( 'bones-stylesheet' );
@@ -197,6 +218,7 @@ function bones_scripts_and_styles() {
 		and your site will load faster.
 		*/
 		wp_enqueue_script( 'jquery' );
+		// wp_enqueue_script( 'philter' );
 		wp_enqueue_script( 'bones-js' );
 		wp_enqueue_script( 'gallery-js', 'photoswipe', 'photoswipe-ui-default');
 		wp_enqueue_script( 'custom-js' );
@@ -222,7 +244,7 @@ function bones_theme_support() {
 	add_theme_support( 'post-thumbnails' );
 
 	// default thumb size
-	set_post_thumbnail_size(125, 125, true);
+	// set_post_thumbnail_size(125, 125, true);
 
 	// wp custom background (thx to @bransonwerner for update)
 	add_theme_support( 'custom-background',

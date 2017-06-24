@@ -1,8 +1,19 @@
-// thumb images must have file name to the following format: imagename_800x600.jpg
-// large images must have file name to the following format: imagename_1200x1000.jpg
-// alt must have the following format: imagename_1200x1000.jpg
+// Swipe Gallery usage:
 
-var initPhotoSwipeFromDOM = function(gallerySelector) {
+// gallerySelector: the selector of the gallery containing all gallery items
+// galleryItemType: the type of the gallery item: DIV, A, DL, LI, etc.
+// The galleryItemType cannot contain of be contained in another element of the same type
+// The gallery items must be of type <a> and must contain the images <img>
+
+
+// To find the size of the image: 
+// 1. small size: look in the src attribute of <img> find imageName-WIDTHxHEIGHT.ext
+// 2. large size: look in the href attribute of the parent <a> find imageName-WIDTHxHEIGHT.ext
+
+// the item gallery must be direct children of the gallery
+
+
+var initPhotoSwipeFromDOM = function(gallerySelector, galleryItemType) {
 
     // parse slide data (url, title, size ...) from DOM elements 
     // (children of gallerySelector)
@@ -84,11 +95,11 @@ var initPhotoSwipeFromDOM = function(gallerySelector) {
             figureEl = thumbElements[i]; // <figure> element
 
             // include only element nodes 
-            if(figureEl.nodeType !== 1) {
+            if(figureEl.nodeType !== 1 || figureEl.tagName.toUpperCase() != galleryItemType) {
                 continue;
             }
 
-            linkEl = figureEl; // .children[0]; // <a> element
+            linkEl = closestChildren(figureEl, function(el){ return el.tagName && el.tagName.toUpperCase() == 'A'}); // <a> element
 
             var img = null
             if(linkEl.children.length > 0) {
@@ -97,69 +108,58 @@ var initPhotoSwipeFromDOM = function(gallerySelector) {
             } 
 
             // find the size of the image: 
-            // 1. look in 'image-size' attribute with format WIDTHxHEIGHT
-            // 2. otherwise use image.naturalWidth, image.naturalHeight
-            // 3. otherwise (possible?) find in image name (src): get string after underscore, before point (to remove extension) and parse with format WIDTHxHEIGHT
+            // 1. small size: look in the src attribute of <img> find imageName-WIDTHxHEIGHT.ext
+            // 2. large size: look in the href attribute of the parent <a> find imageName-WIDTHxHEIGHT.ext
 
-            var smallImageValues = img.getAttribute('imagesize');
-            var smallSize = smallImageValues != null && smallImageValues.length > 0 ? smallImageValues.split('x') : null
-            var largeImageValues = linkEl.getAttribute('imagesize');
-            var largeSize = largeImageValues != null && largeImageValues.length > 0 ? largeImageValues.split('x') : null
+            const regexSmall = /[-_](\d+)x(\d+)\.(\w+)$/;
 
-            var src = img.getAttribute('src');
-            var caption = img.getAttribute('caption');
+            let src = img.src;
+            let caption = img.alt;
+            let href = linkEl.href;
 
-            if((smallImageValues == null || smallImageValues == '') && smallSize == null) {
-                smallSize = [img.naturalWidth, img.naturalHeight]
+            let smallWidth = null
+            let smallHeight = null
+            let largeWidth = null
+            let largeHeight = null
+
+            let m = null
+            if ((m = regexSmall.exec(src)) !== null) {
+                smallWidth = parseInt(m[1]);
+                smallHeight = parseInt(m[2]);
+                let ext = m[3];
             }
 
-            if((smallImageValues == null || smallImageValues == '') && smallSize == null) {
-                var srcs = src.split('/');
-                var srcNoPath = srcs[srcs.length-1];
-                let srcNoPaths = srcNoPath.split('_')
-                smallImageValues = srcNoPaths[srcNoPaths.length - 1];
-                smallSize = smallImageValues.split('.')[0].split('x');
-                if(smallSize.length != 2) {
-                    throw new Error('Error while reading image size in file name.')
-                }
-            }
-            
-            var alt = linkEl.getAttribute('href');
 
-            if(largeImageValues == null || largeImageValues == '') {
-                var alts = src.split('/');
-                var altNoPath = srcs[srcs.length-1];
-                largeImageValues = altNoPath.split('_')[1];
-                largeSize = largeImageValues.split('.')[0].split('x');
+            const regexLarge = /[-_](\d+)x(\d+)(-(\d+))?\.(\w+)$/;
+
+            if ((m = regexLarge.exec(href)) !== null) {
+                largeWidth = parseInt(m[1]);
+                largeHeight = parseInt(m[2]);
+                let ext = m[5];
             }
 
-            // var baseName = smallImageValues[0]
-            var smallSizeX = parseInt(smallSize[0], 10)
-            var smallSizeY = parseInt(smallSize[1], 10)
-
-            var largeSizeX = parseInt(largeSize[0], 10)
-            var largeSizeY = parseInt(largeSize[1], 10)
-
-            // console.log('large: ' + largeSizeX + 'x' + largeSizeY + ', small: ' + smallSizeX + 'x' + smallSizeY);
+            console.log('image: ' + src)
+            console.log('   small size: ' + smallWidth + 'x' + smallHeight)
+            console.log('   large size: ' + largeWidth + 'x' + largeHeight)
 
             // create slide object
             item = {
 
                 mediumImage: {
                     src: src,
-                    w: smallSizeX,
-                    h: smallSizeY
+                    w: smallWidth,
+                    h: smallHeight
                 },
                 originalImage: {
-                    src: alt,
-                    w: largeSizeX,
-                    h: largeSizeY
+                    src: href,
+                    w: largeWidth,
+                    h: largeHeight
                 },
                 title: caption,
-                src: alt,
+                src: href,
                 msrc: src,
-                w: largeSizeX,
-                h: largeSizeY,
+                w: largeWidth,
+                h: largeHeight,
                 el: figureEl  // save link to element for getThumbBoundsFn
             };
 
@@ -171,8 +171,22 @@ var initPhotoSwipeFromDOM = function(gallerySelector) {
 
 
     // find nearest parent element
-    var closest = function closest(el, fn) {
-        return el && ( fn(el) ? el : closest(el.parentNode, fn) );
+    var closestParent = function closestParent(el, fn) {
+        return el && ( fn(el) ? el : closestParent(el.parentNode, fn) );
+    };
+
+    var closestChildren = function closestChildren(el, fn) {
+        if(el && fn(el)) {
+            return el;
+        } else {
+            for(let child of el.children) {
+                let result = closestChildren(child, fn)
+                if(result != null) {
+                    return result;
+                }
+            }
+        }
+        return null;
     };
 
     // triggers when user clicks on thumbnail
@@ -184,8 +198,8 @@ var initPhotoSwipeFromDOM = function(gallerySelector) {
         // console.log("eTarget");
         // console.log(eTarget);
         // find root element of slide
-        var clickedListItem = closest(eTarget, function(el) {
-            return (el.tagName && el.tagName.toUpperCase() === 'A');
+        var clickedListItem = closestParent(eTarget, function(el) {
+            return (el.tagName && el.tagName.toUpperCase() === galleryItemType);
         });
 
         if(!clickedListItem) {
@@ -196,7 +210,7 @@ var initPhotoSwipeFromDOM = function(gallerySelector) {
         // find index of clicked item by looping through all child nodes
         // alternatively, you may define index via data- attribute
         var clickedGallery = clickedListItem.parentNode,
-            childNodes = clickedListItem.parentNode.childNodes,
+            childNodes = clickedGallery.childNodes,
             numChildNodes = childNodes.length,
             nodeIndex = 0,
             index;
@@ -205,7 +219,7 @@ var initPhotoSwipeFromDOM = function(gallerySelector) {
         // console.log(clickedGallery);
 
         for (var i = 0; i < numChildNodes; i++) {
-            if(childNodes[i].nodeType !== 1) { 
+            if(childNodes[i].nodeType !== 1 || childNodes[i].tagName.toUpperCase() != galleryItemType) { 
                 continue; 
             }
 
@@ -305,8 +319,11 @@ var initPhotoSwipeFromDOM = function(gallerySelector) {
         }
 
         if(disableAnimation) {
-            options.showAnimationDuration = 0;
+                
         }
+        options.showHideOpacity = true;
+        // options.showAnimationDuration = 0;
+        // options.hideAnimationDuration = 0;
 
         // Pass data to PhotoSwipe and initialize it
         gallery = new PhotoSwipe( pswpElement, PhotoSwipeUI_Default, items, options);
@@ -401,4 +418,7 @@ var initPhotoSwipeFromDOM = function(gallerySelector) {
 };
 
 // execute above function
-initPhotoSwipeFromDOM('.gallery');
+
+
+// see instructions at the top of the file
+initPhotoSwipeFromDOM('.gallery', 'DL');

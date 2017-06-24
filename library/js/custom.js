@@ -102,74 +102,74 @@
 
 		// put content in an inner div
 
-		let headerJ = $("div.header.center")
-		$("article.post header").before(headerJ)
+		// let headerJ = $("div.header.center")
+		// $("article.post header").before(headerJ)
 
 
-		let galleryJs = $(".gallery")
-		// for(let gallery of galleryJs) {
-    galleryJs.each( (index, gallery)=> {
-			let galleryJ = $(gallery);
+		// let galleryJs = $(".gallery")
+		// // for(let gallery of galleryJs) {
+  //   galleryJs.each( (index, gallery)=> {
+		// 	let galleryJ = $(gallery);
 
-			// create gallery:
+		// 	// create gallery:
 
-			// get item classes
-			// let classes = galleryJ.attr('itemclasses');
-			let largeImageSize = galleryJ.attr('largeimagesize');
-			let largeImageSizeDefined = false;
-			if(largeImageSize != null) {
-				largeImageSize = largeImageSize.split('x');
-				if(largeImageSize.length == 2) {
-					largeImageSizeDefined = true;
-				}
-			}
+		// 	// get item classes
+		// 	// let classes = galleryJ.attr('itemclasses');
+		// 	let largeImageSize = galleryJ.attr('largeimagesize');
+		// 	let largeImageSizeDefined = false;
+		// 	if(largeImageSize != null) {
+		// 		largeImageSize = largeImageSize.split('x');
+		// 		if(largeImageSize.length == 2) {
+		// 			largeImageSizeDefined = true;
+		// 		}
+		// 	}
 
-			let smallImageSize = galleryJ.attr('smallimagesize');
-			let smallImageSizeDefined = false;
-			if(smallImageSize != null) {
-				smallImageSize = smallImageSize.split('x');
-			}
+		// 	let smallImageSize = galleryJ.attr('smallimagesize');
+		// 	let smallImageSizeDefined = false;
+		// 	if(smallImageSize != null) {
+		// 		smallImageSize = smallImageSize.split('x');
+		// 	}
 
 
-			let containerJ = $("<div>");
-			containerJ.addClass('row')
+		// 	// let containerJ = $("<div>");
+		// 	// containerJ.addClass('row')
 
-      // put all img into a linking to the large version of the image
-			// add all item classes to the a item
-			let images = galleryJ.find("img");
+  //     // put all img into a linking to the large version of the image
+		// 	// add all item classes to the a item
+		// 	let images = galleryJ.find("img");
 
-			// for(let img of images) {
-      images.each( (index, img)=> {
-				let imgJ = $(img);
-				let aJ = $('<a>');
-				aJ.append(imgJ);
-				// aJ.addClass(classes);
-				containerJ.append(aJ);
+		// 	// for(let img of images) {
+  //     images.each( (index, img)=> {
+		// 		let imgJ = $(img);
+		// 		// let aJ = $('<a>');
+		// 		// aJ.append(imgJ);
+		// 		// aJ.addClass(classes);
+		// 		// containerJ.append(aJ);
 
-        aJ.attr('href', img.src.replace(/.jpg$/, '_large.jpg'));
+  //       // aJ.attr('href', img.src.replace(/.jpg$/, '_large.jpg'));
 
-				imgJ.load( () => {
-					let imgWidth = img.naturalWidth;
-					let imgHeight = img.naturalHeight;
-					//initializeImage(this, this.width, this.height, imgJ, aJ);
-					// console.log("initializeImage: " + img.src)
-					// console.log("initializeImage: " + imgWidth + ", " + imgHeight)
-					imgJ.attr('imagesize', '' + (smallImageSizeDefined ? smallImageSize[0] : imgWidth) + 'x' + (smallImageSizeDefined ? smallImageSize[1] : imgHeight));
-					aJ.attr('imagesize', '' + (largeImageSizeDefined ? smallImageSize[0] : 2 * imgWidth) + 'x' + (largeImageSizeDefined ? smallImageSize[1] : 2 * imgHeight));
-					// aJ.attr('href', img.src.replace(/.jpg$/, '_large.jpg'));
-				});
-				imgJ.load();
+		// 		imgJ.load( () => {
+		// 			let imgWidth = img.naturalWidth;
+		// 			let imgHeight = img.naturalHeight;
+		// 			//initializeImage(this, this.width, this.height, imgJ, aJ);
+		// 			// console.log("initializeImage: " + img.src)
+		// 			// console.log("initializeImage: " + imgWidth + ", " + imgHeight)
+		// 			imgJ.attr('imagesize', '' + (smallImageSizeDefined ? smallImageSize[0] : imgWidth) + 'x' + (smallImageSizeDefined ? smallImageSize[1] : imgHeight));
+		// 			// aJ.attr('imagesize', '' + (largeImageSizeDefined ? smallImageSize[0] : 2 * imgWidth) + 'x' + (largeImageSizeDefined ? smallImageSize[1] : 2 * imgHeight));
+		// 			// aJ.attr('href', img.src.replace(/.jpg$/, '_large.jpg'));
+		// 		});
+		// 		imgJ.load();
 
-				// if (!img.complete) {
-				// 	console.log("not yet loaded: " + img.src)
+		// 		// if (!img.complete) {
+		// 		// 	console.log("not yet loaded: " + img.src)
 
-				// } else {
-				// 	console.log("already loaded:" + img.src)
-				// 	initializeImage(img, imgJ, aJ, true);
-				// }
-			})
-			galleryJ.append(containerJ);
-		})
+		// 		// } else {
+		// 		// 	console.log("already loaded:" + img.src)
+		// 		// 	initializeImage(img, imgJ, aJ, true);
+		// 		// }
+		// 	})
+		// 	// galleryJ.append(containerJ);
+		// })
 
 
 
@@ -201,6 +201,12 @@
 		// if(paginationJ.children().length <= 1) {
 		// 	paginationJ.hide()
 		// }
+
+		// $('.gallery').masonry({
+		// 	// options
+		// 	itemSelector: '.gallery-item',
+		// 	columnWidth: 1
+		// });
 
 		let footerCategoryJ = $('.footer-category')
 

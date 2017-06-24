@@ -4,11 +4,15 @@
 
 				<div id="inner-content" class="">
 
+					<div id="fullpage">
+
 						<main id="main" class="" role="main" itemscope itemprop="mainContentOfPage" itemtype="http://schema.org/Blog">
 
-							<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
 
-							<article id="post-<?php the_ID(); ?>" <?php post_class( 'am-column' ); ?> role="article">
+							<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
+							
+
+							<article id="post-<?php the_ID(); ?>" <?php post_class( ['am-column', 'section'] ); ?> role="article">
 
 								<!-- <header class="article-header"> -->
 
@@ -24,7 +28,10 @@
 
 											<?php
 												if ( has_post_thumbnail() ) {
-													the_post_thumbnail();
+
+													// the_post_thumbnail( );
+													the_post_thumbnail( 'thumbnail');
+													// the_post_thumbnail( 'thumbnail', ['data-philter-grayscale' => '60 0'] );
 												} else {
 													$first_image_thumb_url = get_first_image_thumb_url(get_the_ID());
 
@@ -55,12 +62,10 @@
 												}
 											?>
 
-											<h1 class="h2 entry-title"><span><?php the_title(); ?></span></h1>
-
 										</a>
 									</section>
 
-									<footer class="article-footer ">
+									<!-- <footer class="article-footer "> -->
 	                 				<?php // printf( '<p class="footer-category">%1$s</p>' , get_the_category_list(' ') ); ?>
 	                  				<?php // the_tags( '<p class="footer-tags tags"><span class="tags-title">' . __( 'Tags:', 'bonestheme' ) . '</span> ', ', ', '</p>' ); ?>
 
@@ -79,11 +84,13 @@
 	                    							// ); ?>
 										<!-- </p> -->
 
-									</footer>
+									<!-- </footer> -->
 
+									<h1 class="entry-title"><span><?php the_title(); ?></span></h1>
 								</div> <!-- / div.am-preview-frame -->
 
 							</article>
+
 
 							<?php endwhile; ?>
 
@@ -104,10 +111,13 @@
 							<?php endif; ?>
 
 
+
 						</main>
 
-									<?php bones_page_navi(); ?>
-					<?php // get_sidebar(); ?>
+						<?php bones_page_navi(); ?>
+						<?php // get_sidebar(); ?>
+
+					</div> <!--  full page -->
 
 				</div>
 
