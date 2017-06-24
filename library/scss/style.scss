@@ -430,9 +430,17 @@ body.home {
 	align-items: center;
 
 	dl.gallery-item {
-    	width: 260px;
+		width: 250px;
+		height: 250px;
+		object-fit: contain;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background: black;
+		border: 2px solid black;
 	    margin: 10px;
 	    overflow: hidden;
+	    
 		dt.gallery-icon {
 
 			display: flex;

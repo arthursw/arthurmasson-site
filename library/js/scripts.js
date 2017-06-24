@@ -227,9 +227,34 @@ jQuery(document).ready(function($) {
   //   e.preventDefault()
   // } )
 
+let mouseX = null
+let mouseY = null
+
 $(document).ready(function() {
   let articlesJ = $('article')
   articlesJ.draggable({ cancel: 'p,input,textarea,button,select,option,h1' })
+
+
+  $(document.body).mousemove(function( event ) {
+      mouseX = event.pageX
+      mouseY = event.pageY
+  })
+
+  // function update() {
+  //   requestAnimationFrame( update );
+  //   for(let article of articlesJ) {
+  //     let articleJ = $(article)
+  //     if(articleJ.hasClass('ui-draggable-dragging')) {
+  //       continue;
+  //     }
+  //     let position = articleJ.offset()
+  //     let distX = mouseX - position.left
+  //     let distY = mouseY - position.top
+  //     let distSquared = 0.1 * Math.sqrt(distX * distX + distY * distY)
+  //     articleJ.offset({left: position.left + distX / distSquared, top: position.top + distY / distSquared})
+  //   }
+  // }
+  // update()
 
   // for(let article of articlesJ) {
   //   let articleJ = $(article)
