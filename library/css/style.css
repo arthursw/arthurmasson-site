@@ -2251,20 +2251,20 @@ body.home #main {
         background-color: #03A9F4;
         color: #ffffff; }
 
-body.single #main {
+body.single #main, body.page #main {
   margin-top: 50px;
   margin-right: 300px;
   width: 66%; }
   @media screen and (min-width: 0) and (max-width: 760px) {
-    body.single #main {
+    body.single #main, body.page #main {
       margin-right: 0;
       width: 100%; }
-      body.single #main article {
+      body.single #main article, body.page #main article {
         padding: 10px; } }
   @media screen and (min-width: 760px) and (max-width: 1030px) {
-    body.single #main {
+    body.single #main, body.page #main {
       margin-right: 0; } }
-  body.single #main article {
+  body.single #main article, body.page #main article {
     cursor: -webkit-grab;
     cursor: -moz-grab;
     cursor: grab;
@@ -2272,7 +2272,7 @@ body.single #main {
     background-color: white;
     border: 1px solid gray;
     padding: 30px; }
-    body.single #main article .entry-content {
+    body.single #main article .entry-content, body.page #main article .entry-content {
       cursor: initial; }
 
 @media screen and (min-width: 0) and (max-width: 760px) {
